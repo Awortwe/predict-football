@@ -1,4 +1,1 @@
-# System packages for Streamlit Community Cloud (installed with apt-get).
-# LightGBM's manylinux wheel links OpenMP dynamically; the slim base image does
-# not ship it, and without it `import lightgbm` fails at app start.
 libgomp1
