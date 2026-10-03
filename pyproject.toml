@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "predict_football"
+version = "0.1.0"
+description = "Football probability and intelligence system: calibrated pre-match, live, halftime and post-match analysis."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "predict_football contributors" }]
+keywords = ["football", "soccer", "probability", "dixon-coles", "poisson", "calibration"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "numpy==2.2.6",
+    "pandas==2.3.3",
+    "scipy==1.15.3",
+    "scikit-learn==1.7.2",
+    "statsmodels==0.15.0",
+    "lightgbm==4.7.0",
+    "plotly==7.1.0",
+    "streamlit==1.65.0",
+    "requests==2.34.2",
+    "python-dotenv==1.2.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "ruff==0.16.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/predict_football"
+Repository = "https://github.com/your-org/predict_football"
+
+[project.scripts]
+predict-football = "predict_football.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+predict_football = ["py.typed"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src", "tests", "scripts", "tools"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "RET",  # flake8-return
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "RUF001",  # ambiguous unicode in strings: deliberate, used for football glyphs
+    "RUF002",
+    "RUF003",
+    "SIM108",  # ternary is not always clearer than if/else
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
+# The app inserts src/ onto sys.path before importing the package so a
+# Streamlit Community Cloud checkout runs without installing the project.
+"streamlit_app.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["predict_football"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra --strict-markers --strict-config"
+filterwarnings = [
+    "error::FutureWarning",
+    "error::DeprecationWarning:predict_football.*",
+]
+markers = [
+    "network: test requires internet access (deselect with '-m \"not network\"')",
+    "slow: test is slow",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["predict_football"]

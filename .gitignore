@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Testing / linting caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Environment / secrets -- .env must NEVER be committed
+.env
+.env.*
+!.env.example
+
+# Data: raw and processed are reproducible artefacts, never commit them.
+# See docs/DATA_SOURCES.md for why we do not redistribute source data either.
+data/raw/
+data/processed/
+data/cache/
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Model artefacts: large, and regenerable via scripts/train.py
+artifacts/
+models/
+*.pkl
+*.joblib
+*.parquet
+
+# Reports
+reports/
+!reports/.gitkeep
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

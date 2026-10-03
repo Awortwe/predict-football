@@ -1,0 +1,38 @@
+# ---------------------------------------------------------------------------
+# predict_football -- FULLY PINNED runtime requirements
+#
+# Deliberately duplicated from pyproject.toml. Deployment targets such as
+# Streamlit Community Cloud and many container builders read this file instead
+# of pyproject.toml, so both must exist and must stay in sync.
+#
+# Python: 3.10  (see runtime.txt / Dockerfile -- they must agree)
+#
+# WHY EVERY VERSION IS PINNED EXACTLY, NOT JUST ">=<something>":
+# Your interpreter is Python 3.10, which is now at the very bottom of the
+# supported range for this stack. numpy has already hit its 3.10 ceiling at
+# 2.2.6 and scipy at 1.15.3 -- their NEXT releases require Python 3.11+.
+# An unpinned install in six months will try to take those and fail.
+#
+# Regenerate after any dependency change:
+#   .venv\Scripts\python.exe -m pip freeze --exclude-editable > requirements.txt
+# ---------------------------------------------------------------------------
+
+# --- core numerics ---
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+scikit-learn==1.7.2
+statsmodels==0.15.0
+lightgbm==4.7.0
+
+# --- app / visualisation ---
+plotly==7.1.0
+streamlit==1.65.0
+
+# --- io / config ---
+requests==2.34.2
+python-dotenv==1.2.4
+
+# --- tooling ---
+pytest==9.1.1
+ruff==0.16.10
