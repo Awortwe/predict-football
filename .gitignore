@@ -35,9 +35,11 @@ data/*.db-journal
 data/*.db-wal
 data/*.db-shm
 
-# Model artefacts: large, and regenerable via scripts/train.py
-artifacts/
-models/
+# Model artefacts: large, and regenerable via scripts/train.py.
+# Anchored to the repository root so the source package
+# src/predict_football/models/ is not accidentally ignored.
+/artifacts/
+/models/
 *.pkl
 *.joblib
 *.parquet
